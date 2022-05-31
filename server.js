@@ -31,3 +31,26 @@ app.get("/magic/:question", (request, response) => {
     let question = String(request.params.question)
     response.send(`<h1>${question}: ${randomResponse}</h1>`)
 })
+
+// Fibonnaci 
+app.get("/fibonnaci/:start", (request, response) => {
+    let startNumber = Number(request.params.start)
+    if (startNumber < 0){
+        response.send("I can tell this is not a fibonacci number")
+    }
+    else {
+        let krabbyPattyFormula1 = 5 * startNumber * startNumber + 4
+        let krabbyPattyFormula2 = 5 * startNumber * startNumber - 4
+        if ((isPerfectSquare(krabbyPattyFormula1)) || (isPerfectSquare(krabbyPattyFormula2))){
+            response.send("Very good. It is Fibonacci")
+        }
+        else {
+            response.send("I can tell this is not a fibonacci number")
+        }
+    }
+})
+
+function isPerfectSquare(num){
+    let factor = Math.floor(Math.sqrt(num))
+    return (factor * factor === num)
+}
