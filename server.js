@@ -17,6 +17,21 @@ app.get('/magic/:question' , (req,res)=>{
     res.send(`Your question: ${question}? The ball says: <h1>${magic8Responses[Math.floor(Math.random()*magic8Responses.length)]}</h1>`)
 })
 
+//fibonacci
+app.get('/fibonacci/:num' , (req,res)=>{
+    let fibNums = [0,1]
+    let num = Number(req.params.num)
+    while (fibNums[fibNums.length-1] < num){
+        let f1 = fibNums.length - 1
+        let f2 = fibNums.length - 2
+        fibNums.push(fibNums[f1]+fibNums[f2])
+    }
+    //console.log(fibNums)
+    
+    let response
+    fibNums.includes(num) ? response = `${num} :this is a fibonnaci number!` : response = `${num} is not a fibonnaci number....`
+    res.send(response)
+})
 
 app.listen(port, ()=>{
     console.log('in the port')

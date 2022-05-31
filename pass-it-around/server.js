@@ -28,8 +28,6 @@ app.get('/:num' , (req,res)=>{
     }
 })
 
-
-
 app.listen(port, ()=>{
     console.log('in the port')
 })
