@@ -11,3 +11,7 @@ app.get("/greeting/:name", (request, response) => {
     const name = request.params.name
     response.send(`Hi, ${name}`)
 })
+
+app.get('/tip/:total/:tipPercentage', (request, response) => {
+    response.send(`${request.params.total*request.params.tipPercentage/100}`)
+})
