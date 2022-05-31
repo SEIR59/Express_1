@@ -9,3 +9,9 @@ app.listen(port,()=>{
 app.get('/greeting/:name', (req,res) => {
     res.send(`Hello there ${req.params.name}`)
 })
+
+app.get('/tip/:total/:tipPercentage', (req,res) => {
+    tipPercentage = Number(req.params.total) * Number(req.params.tipPercentage) / 100
+    res.send(`The tip is ${tipPercentage}`)
+    
+})
