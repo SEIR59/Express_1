@@ -1,4 +1,5 @@
 const express = require('express')
+const req = require('express/lib/request')
 const app = express()
 const port = 3000
 
@@ -24,6 +25,21 @@ app.get('/magic/:question', (req, res) => {
     randomResponse = responseArr[Math.floor(Math.random() * responseArr.length)]
     res.send(`<h1> ${req.params.question}? --> ${randomResponse}`)
 })
+
+
+// ******** FIBONACCI ********
+
+app.get('/:number', (req, res) => {
+    num = Number(req.params.number)
+    const findPerfectSquare = (x) => {
+        for (let i = 1; i < x; i++){
+            if (x / i === i) return true
+        }
+        return false
+    }
+    findPerfectSquare(5*num*num + 4) || findPerfectSquare(5*num*num - 4) ? res.send(`Very good. ${num} is a Fibonacci.`) : res.send(`I can tell ${num} is not a Fibonacci number`)
+})
+
 
 
 app.listen(port, () => {
