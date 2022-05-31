@@ -39,6 +39,31 @@ app.get("/magic/Will%20I%20Be%20A%20Millionaire", (req, res) => {
   res.send(`${magic8[ran]}`);
 });
 
+// Fibonacci
+
+app.get("/fibonacci/:num", (req, res) => {
+  const num = Number(req.params.num);
+  let a = 0;
+  let b = 1;
+  let c = a + b;
+  if (num === a || num === b) {
+    res.send("Very good. It is Fibonacci.");
+    return;
+  }
+
+  while (c <= num) {
+    if (c === num) {
+      res.send("Very good. It is Fibonacci.");
+      return;
+    }
+    a = b;
+    b = c;
+    c = a + b;
+  }
+
+  res.send("I can tell this is not a fibonacci number.");
+});
+
 app.listen(port, () => {
   console.log("port: " + port);
 });
