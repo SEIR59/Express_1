@@ -7,6 +7,7 @@ app.listen(port, () => {
     // console.log("is the port active?")
 })
 
-app.get("/greeting", (req, res) => {
+app.get("/greeting/:name", (req, res) => {
     res.send("Hello stranger!")
 })
+
