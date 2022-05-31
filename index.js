@@ -8,6 +8,7 @@ app.listen(port, () => {
 })
 
 app.get("/greeting/:name", (req, res) => {
-    res.send("Hello stranger!")
+    let name = req.params.name
+    res.send(`Hello ${name}! It's so nice to meet you.`)
 })
 
