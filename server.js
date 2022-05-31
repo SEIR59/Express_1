@@ -16,5 +16,12 @@ app.get('/greeting/:name',(req,res) => {
     console.log(req.params)
     res.send("Hello, It's so great to see you! " + req.params.name)
 })
-//"Greeting express application created."
 
+
+//===== Tip Calculator =====//
+app.get('/tip/:total/:tipPercentage',(req,res) => {
+
+let tip = parseInt(req.params.total)*(parseInt(req.params.tipPercentage)/100)
+
+res.send(tip.toString())
+})
