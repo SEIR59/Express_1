@@ -29,7 +29,7 @@ app.get('/fibonacci/:num' , (req,res)=>{
     //console.log(fibNums)
     
     let response
-    fibNums.includes(num) ? response = `${num} :this is a fibonnaci number!` : response = `${num} is not a fibonnaci number....`
+    fibNums.includes(num) ? response = `${num} :this is a fibonacci number!` : response = `${num} is not a fibonacci number....`
     res.send(response)
 })
 
