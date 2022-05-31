@@ -20,7 +20,7 @@ app.get("/greeting/:name", (request, response) => {
 app.get("/tip/:total/:tipPercentage", (request, response) => {
     const bill = Number(request.params.total)
     const tip = Number(request.params.tipPercentage)
-    let tipAmount = Number(tip/bill*100)
+    let tipAmount = Number(bill*(tip/100))
     response.send(`Tip Amount: ${tipAmount}`)
 })
 
