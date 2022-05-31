@@ -50,6 +50,25 @@ app.get("/magic/:question", (req, res) => {
   res.end();
 });
 
+// Fibonacci
+
+app.get("/fibonacci/:num", (req, res) => {
+  function checkFib(num, second = 1, first = 0) {
+    if (num > second) {
+      return checkFib(num, second + first, second);
+    } else if (num === second) {
+      return true;
+    }
+    return false;
+  }
+  let number = parseInt(req.params.num);
+  let answer = checkFib(number, 1, 0);
+  console.log(answer);
+  answer
+    ? res.send("Very good. It is Fibonacci.")
+    : res.send("I can tell this is not a fibonacci number.");
+});
+
 app.listen(port, () => {
   console.log("app is running on port", port);
 });
