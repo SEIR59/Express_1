@@ -7,10 +7,12 @@ app.listen(port, () => {
   console.log("app is running on port: ", port);
 });
 
+// GREETINGS
 app.get("/greeting/:name", (req, res) => {
   res.send(`Hello, ${req.params.name}!`);
 });
 
+// TIP CALCULATOR
 app.get("/tip/:total/:tipPercentage", (req, res) => {
   tip = parseInt(req.params.total) * (parseInt(req.params.tipPercentage) / 100);
   res.send(
@@ -41,7 +43,28 @@ let eightBall = [
   "Very doubtful",
 ];
 
+// MAGIC 8 BALL
 app.get("/magic/:question", (req, res) => {
   let answer = eightBall[Math.floor(Math.random() * eightBall.length)];
   res.send(`${req.params.question} <h1>${answer}</h1>`);
+});
+
+// TAKE ONE DOWN AND PASS IT AROUND
+app.get("/", (req, res) => {
+  res.send(
+    `99 Bottles of beer on the wall. <a href="/98">Take one down pass it around.</a>`
+  );
+});
+
+app.get("/:numberOfBottles", (req, res) => {
+  let numberOfBottles = req.params.numberOfBottles;
+  if (numberOfBottles > 0) {
+    res.send(
+      `${numberOfBottles} Bottles of beer on the wall. <a href="/${
+        numberOfBottles - 1
+      }">Take one down pass it around.</a>`
+    );
+  } else {
+    res.send(`<a href="/">Start over and drink more beer!</a>`);
+  }
 });
