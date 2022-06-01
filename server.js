@@ -2,15 +2,24 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
-// app.get("/calc/:num1/:num2", (req, res) => {
-//     let sum = parseInt(req.params.num1) + parseInt(req.params.num2);
-//     res.send(`${req.params.num1} + ${req.params.num2} is ${sum}`);
-//   });
+// axios bonus
+const axios = require("axios");
 
+app.get("/axios", (req, res) => {
+  axios.get("http://jservice.io/api/random").then((response) => {
+    res.setHeader("Content-type", "text/html");
+    res.write(`${response.data[0].question}`);
+    res.write(`</br></br>${response.data[0].answer}`);
+    res.end();
+  });
+});
+
+// greeting problem
 app.get("/greeting/:name", (req, res) => {
   res.send(`Hello there , ${req.params.name}`);
 });
 
+// tip
 app.get("/tip/:total/:percentage", (req, res) => {
   let total = parseFloat(req.params.total);
   let percentage = parseFloat(req.params.percentage) / 100;
@@ -18,6 +27,7 @@ app.get("/tip/:total/:percentage", (req, res) => {
   res.send(`The tip is : ${tip}`);
 });
 
+// magic 8
 app.get("/magic/:question", (req, res) => {
   let answerArr = [
     "It is certain",
