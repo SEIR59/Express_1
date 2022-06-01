@@ -64,6 +64,32 @@ app.get("/fibonacci/:num", (req, res) => {
   res.send("I can tell this is not a fibonacci number.");
 });
 
+// Axios
+// Use axios within node to make a request to jservice.io and get a random trivia question and log the JSON in terminal.
+const axios = require("axios");
+axios({
+  method: "get",
+  url: "http://jservice.io/api/random",
+}).then(function (response) {
+  console.log(response.data);
+});
+// Use express to make a route that will display a random trivia question and its answer
+app.get("/jservice", (req, res) => {
+  axios.get("http://jservice.io/api/random").then((response) =>
+    res.send({
+      question: response.data[0].question,
+      answer: response.data[0].answer,
+    })
+  );
+});
+// Make a route that will deliver jservice results for one of either the clues, random, categories, category API endpoints, depending on user input.
+app.get("/jservice/:result", (req, res) => {
+  const result = req.params.result;
+  axios.get(`http://jservice.io/api/${result}`).then((response) => {
+    res.send(response.data);
+  });
+});
+
 app.listen(port, () => {
   console.log("port: " + port);
 });
