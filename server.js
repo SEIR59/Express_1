@@ -28,3 +28,24 @@ app.get(`/magic/:question`, (req, res) => {
 }) 
 
 // Take one Down and Pass it Around
+app.get(`/`, (req, res) => {
+    let bottles = 99
+    res.send(`
+    <h1>99 Bottles of beer on the wall</h1>
+    <a href="/${bottles-1}">Take one down, pass it around</a>
+    `)
+})
+
+app.get(`/:number_of_bottles`, (req, res) => {
+    const number = parseInt(req.params.number_of_bottles)
+    // res.send(`
+        // <h1>${number} Bottles of beer on the wall</h1>
+        number > 0 ? res.send(`
+            <h1>${number} Bottles of beer on the wall</h1>
+            <a href="/${(number-1)}">Take one down, pass it around</a>
+            `) : res.send(
+            `<h1>${number} Bottles of beer on the wall</h1>
+            <a href="/">Start over</a>
+            `)
+        // `)
+})
