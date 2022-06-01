@@ -2,18 +2,17 @@ const express = require('express');
 const port = 3000;
 const app = express();
 
-
 app.get('/', (req, res) => {
-    let bottles = 99;
-    res.send(`
+  let bottles = 99;
+  res.send(`
         <h1>${bottles} Bottles of beer on the wall</h1>
         <a href='/${bottles - 1}'>take one down, pass it around</a>
       `);
-  });
-  
-  app.get('/:number_of_bottles', (req, res) => {
-    const numBottles = parseInt(req.params.number_of_bottles);
-    res.send(`
+});
+
+app.get('/:number_of_bottles', (req, res) => {
+  const numBottles = parseInt(req.params.number_of_bottles);
+  res.send(`
       <h1>${numBottles} Bottles of beer on the wall</h1>
       ${
         numBottles - 1 >= 0
@@ -21,7 +20,7 @@ app.get('/', (req, res) => {
           : `<a href='/'>start over</a>`
       }
       `);
-  });
+});
 
 app.get('/greeting/:name', (req, res) => {
   res.send(`Hello, ${req.params.name}`);
@@ -63,6 +62,25 @@ app.get('/magic/:question', (req, res) => {
   );
 });
 
-app.listen(3000, () => {
+app.get('/trivia/questions', (req, res) => {
+  const getTrivia = async () => {
+    try {
+      const response = await axios.get('http://jservice.io/api/random');
+      console.log(response.data);
+      const { question, answer } = response.data[0];
+      res.send(`
+          <h1>Question: ${question} </h1>
+          <h2>Answer: ${answer} </h2>
+        `);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  getTrivia();
+});
+
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
